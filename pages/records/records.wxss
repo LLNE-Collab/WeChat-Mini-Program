@@ -1,0 +1,20 @@
+.device-head {
+  background:rgb(230, 216, 193);
+  margin: -24rpx -32rpx 0;
+  padding: 42rpx 32rpx 52rpx;
+  box-shadow: 0 12rpx 28rpx rgba(70, 54, 33, 0.22);
+}
+.records-shift {
+  margin-top: 100rpx;
+}
+.rec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rec-row .label { margin-bottom: 0; }
+.rec-row-next { margin-top: 48rpx; }
+.rec-arrow {
+  width: 36rpx;
+  height: 36rpx;
+}

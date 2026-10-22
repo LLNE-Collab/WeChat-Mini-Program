@@ -1,0 +1,25 @@
+<view class="page tab-pad">
+  <view class="h1" style="width: 587rpx; display: block; box-sizing: border-box">乳腺癌术后居家康复</view>
+  <view class="sub">{{date}}   早日康复</view>
+  <view class="card status">
+    <view class="k">当天状态</view>
+    <block wx:if="{{trained}}">
+      <view class="line">练到第 {{level}} 级</view>
+      <view class="line">上次肩高差 {{shoulder}}</view>
+      <view class="line">{{doneToday ? '今日已完成' : '今日还没完成'}}</view>
+    </block>
+    <view wx:else class="v">尚未进行训练</view>
+  </view>
+  <view class="card">
+    <view class="kicker">欢迎使用</view>
+    <view class="tiles">
+      <button class="tile assess" data-go="assess" bindtap="go" style="width: 277rpx; height: 185rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><image style="position: absolute; left: 172rpx; top: 120rpx" class="tile-ico" src="/assets/icon-assess.png" mode="aspectFit" /><text class="han">评估</text><text class="name">测试身体状态</text></button>
+      <button class="tile train" data-go="train" bindtap="go" style="width: 277rpx; height: 185rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx"><image style="position: absolute; left: 172rpx; top: 118rpx" class="tile-ico" src="/assets/icon-train.png" mode="aspectFit" /><text class="han">训练</text><text class="name">边做边答题</text></button>
+      <button class="tile posture" data-go="posture" bindtap="go" style="width: 277rpx; height: 185rpx; display: block; box-sizing: border-box; left: 0rpx; top: 16rpx; position: relative"><image style="position: absolute; left: 172rpx; top: 120rpx" class="tile-ico" src="/assets/icon-posture.png" mode="aspectFit" /><text class="han">姿势</text><text class="name">纠正姿势</text></button>
+      <button class="tile result" data-go="result" bindtap="go" style="width: 277rpx; height: 185rpx; display: block; box-sizing: border-box; left: 0rpx; top: 16rpx; position: relative"><image style="position: absolute; left: 196rpx; top: 120rpx" class="tile-ico" src="/assets/icon-result.png" mode="aspectFit" /><text class="han">结果</text><text class="name">训练成效</text></button>
+    </view>
+  </view>
+  <button class="btn {{primaryClass}}" data-go="{{primaryGo}}" bindtap="go" style="width: 380rpx; display: block; box-sizing: border-box; left: 0rpx; top: 11rpx; height: 70rpx; position: relative">{{primary}}</button>
+  <button wx:if="{{hasAssess}}" class="linkish" data-go="predict" bindtap="go" style="position: relative; left: 0rpx; top: 5rpx">预期训练效果</button>
+  
+</view>

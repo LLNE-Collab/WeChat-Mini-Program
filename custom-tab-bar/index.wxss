@@ -1,0 +1,69 @@
+.bar {
+  font-family: "黑体", "Heiti SC", sans-serif;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, #f6f3ee 72%, rgba(246, 243, 238, 0));
+  z-index: 99;
+}
+.pill {
+  position: relative;
+  display: flex;
+  width: 520rpx;
+  margin: 0 auto;
+  background: #eef2f6;
+  border-radius: 999rpx;
+  box-shadow: 0 8rpx 24rpx rgba(33, 33, 33, 0.08);
+  overflow: hidden;
+}
+.thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8rpx;
+  width: calc(50% - 16rpx);
+  background: #fff;
+  border-radius: 999rpx;
+  box-shadow: 0 6rpx 16rpx rgba(47, 111, 232, 0.18);
+}
+.animate .thumb {
+  transition: left 0.42s cubic-bezier(0.22, 0.8, 0.28, 1);
+}
+.thumb.at-mine { left: calc(50% + 8rpx); }
+.item {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #9a9a9a;
+}
+.animate .item { transition: color 0.32s ease; }
+.item.on { color: #1a56d2; }
+.ico-wrap {
+  position: relative;
+  width: 52rpx;
+  height: 52rpx;
+  margin-right: 8rpx;
+}
+.ico {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 52rpx;
+  height: 52rpx;
+  opacity: 0;
+}
+.animate .ico { transition: opacity 0.32s ease; }
+.ico.show { opacity: 1; }
+.label {
+  margin-top: 0;
+  font-size: 27rpx;
+  font-weight: 600;
+  line-height: 1.2;
+}

@@ -1,0 +1,48 @@
+<view class="page" wx:if="{{phase==='guide'}}">
+  <view class="h1">先把手机放好</view>
+  <view class="lead">动作顺序：躺着死虫式，跪着鸟狗式，站着弹力带抗旋转推举。动作停住时出题。</view>
+  <view class="card">
+    <view><text style="font-weight:800">站着</text> 大约 1.2 米高，离人大约 2 米。</view>
+    <view style="margin-top:12rpx"><text style="font-weight:800">跪着</text> 镜头放低，看清肩膀到髋。</view>
+    <view style="margin-top:12rpx"><text style="font-weight:800">躺着</text> 放在头上方，大约斜 30°。</view>
+    <view style="margin-top:12rpx;font-weight:800">全身入镜，训练不弹出画面，不用停下看动作。</view>
+  </view>
+  <view class="lead level-line">今天是第 {{level}} 级：{{levelName}}</view>
+  <view class="place">打开摄像头后，每8秒记一张。</view>
+  <button class="btn lime" bindtap="startCam">打开摄像头，开始训练</button>
+  <button class="btn ghost" bindtap="startSim">不方便开摄像头</button>
+</view>
+
+<view class="page" wx:elif="{{phase==='setup'}}">
+  <view class="hint">第 {{exercise + 1}} 个动作，共 3 个</view>
+  <view class="card">
+    <view style="font-size:40rpx;font-weight:800">{{ex.hold}}</view>
+    <view style="margin-top:12rpx">{{ex.place}}</view>
+  </view>
+  <view class="hint">{{camNote}}</view>
+  <button class="btn lime" bindtap="hold">我停住了，开始答题</button>
+</view>
+
+<view class="page" wx:else>
+  <view class="hint">第 {{q.n}} 题，共 6 题 · 第 {{level}} 级</view>
+  <view style="font-weight:700;margin-bottom:12rpx">{{ex.hold}}</view>
+  <view class="giant" style="color:{{q.giantColor}}">{{q.giant}}</view>
+  <view style="font-size:40rpx;font-weight:800">{{q.prompt}}</view>
+  <block wx:if="{{q.type==='choice'}}">
+    <button wx:for="{{q.options}}" wx:key="text" class="ans" data-v="{{item.text}}" bindtap="pick">{{item.text}}</button>
+  </block>
+  <block wx:elif="{{q.type==='grid'}}">
+    <view class="grid">
+      <view wx:for="{{q.cells}}" wx:key="i" class="cell {{item.struck ? 'struck' : ''}}" data-i="{{item.i}}" bindtap="strike">{{item.n}}</view>
+    </view>
+    <button class="btn lime" bindtap="gridDone">划完了</button>
+  </block>
+  <block wx:else>
+    <view class="hint">每说出一个，写下来再记下。至少 3 个。说完按下面的按钮。</view>
+    <input class="word" value="{{word}}" bindinput="onWord" placeholder="一个词" maxlength="8" />
+    <button class="btn lime" bindtap="addWord">记下</button>
+    <view class="chips"><text wx:for="{{wordList}}" wx:key="*this">{{item}}</text></view>
+    <button class="btn lime" bindtap="wordDone">说完了</button>
+  </block>
+</view>
+<camera wx:if="{{showCam}}" id="cam" device-position="front" flash="off" class="hidecam" binderror="onCamError" bindinitdone="onCamReady"></camera>

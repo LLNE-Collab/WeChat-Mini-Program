@@ -1,0 +1,17 @@
+<view class="page tab-pad">
+  <view class="device-head">
+    <view class="h1">该设备</view>
+  </view>
+
+  <view class="records-shift">
+  <view class="rec-row" bindtap="goSessions">
+    <view class="label">答题记录</view>
+    <image class="rec-arrow" src="/assets/icon-chevron.png" mode="aspectFit" />
+  </view>
+  <view class="rec-row rec-row-next" bindtap="goPostures">
+    <view class="label">姿势记录</view>
+    <image class="rec-arrow" src="/assets/icon-chevron.png" mode="aspectFit" />
+  </view>
+  <button class="btn ghost" bindtap="wipe" style="position: relative; left: 0rpx; top: 0rpx; height: -45rpx; display: ; box-sizing:">清空记录</button>
+  </view>
+</view>

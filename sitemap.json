@@ -1,0 +1,4 @@
+{
+  "desc": "双行立衡原型",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

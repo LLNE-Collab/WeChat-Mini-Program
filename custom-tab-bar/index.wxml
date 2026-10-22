@@ -1,0 +1,19 @@
+<view class="bar">
+  <view class="pill {{animate ? 'animate' : ''}}">
+    <view class="thumb {{selected === 1 ? 'at-mine' : ''}}"></view>
+    <view
+      wx:for="{{list}}"
+      wx:key="pagePath"
+      class="item {{selected === index ? 'on' : ''}}"
+      data-path="{{item.pagePath}}"
+      data-index="{{index}}"
+      bindtap="switchTab"
+    >
+      <view class="ico-wrap">
+        <image class="ico {{selected === index ? '' : 'show'}}" src="{{item.icon}}" mode="aspectFit" />
+        <image class="ico {{selected === index ? 'show' : ''}}" src="{{item.iconOn}}" mode="aspectFit" />
+      </view>
+      <text class="label">{{item.text}}</text>
+    </view>
+  </view>
+</view>

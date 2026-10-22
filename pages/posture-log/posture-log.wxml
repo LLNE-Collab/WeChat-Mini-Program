@@ -1,0 +1,10 @@
+<view class="page">
+  <block wx:if="{{list.length}}">
+    <view class="rec" wx:for="{{list}}" wx:key="id">
+      <view class="nth">第 {{item.n}} 次</view>
+      <view>{{item.when}}</view>
+      <view class="hint">{{item.line}}</view>
+    </view>
+  </block>
+  <view wx:else class="empty">暂无记录</view>
+</view>

@@ -1,0 +1,23 @@
+<view class="page" wx:if="{{empty}}">
+  <view class="status"><view class="v">您未进行训练</view></view>
+</view>
+<view class="page" wx:else>
+  <view class="lead">{{when}} · 第 {{level}} 级 · {{levelName}}</view>
+  <view class="pair">
+    <view class="card"><text>正确率</text><text class="num">{{pct}}%</text></view>
+    <view class="card"><text>反应时间</text><text class="num">{{rt}} 秒</text></view>
+  </view>
+  <view class="label" style="margin-top:24rpx">题目难的时候，身子歪了多少</view>
+  <canvas type="2d" id="session" class="chart"></canvas>
+  <view class="hint">绿线是歪了多少。红虚线是界限。浅红块是过了界限的时段。</view>
+  <view class="q-list">
+    <view class="row" wx:for="{{rows}}" wx:key="n">
+      {{item.text}}<text wx:if="{{item.over}}" class="over"> · 过了界限</text>
+    </view>
+  </view>
+  <view class="advice"><text class="title">{{adviceTitle}}</text><view>{{adviceDetail}}</view></view>
+  <view class="hint">{{photoLine}}</view>
+  <view class="hint">界限暂定为侧歪 {{threshold}}°，是假设参数，不是诊断标准。</view>
+  <button class="btn green" bindtap="toPose">去做姿势对照</button>
+  <button class="btn ghost" bindtap="home">回到今天</button>
+</view>

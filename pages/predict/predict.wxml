@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="lead">按您评估里的情况来推。改下面的数，曲线马上重算。</view>
+  <view class="card" style="margin-bottom:20rpx">{{profile}}</view>
+  <view class="slider-row"><text>完成得勤不勤</text><text>{{adherence}}%</text></view>
+  <slider min="0" max="100" step="5" value="{{adherence}}" activeColor="#5E516C" bindchange="onAdh" bindchanging="onAdh" />
+  <view class="slider-row"><text>动作做得怎样</text><text>{{quality}}%</text></view>
+  <slider min="0" max="100" step="5" value="{{quality}}" activeColor="#5E516C" bindchange="onQuality" bindchanging="onQuality" />
+  <view class="label">题目进到哪一级</view>
+  <view class="weeks">
+    <button wx:for="{{levels}}" wx:key="*this" class="wk {{level===item?'on':''}}" data-n="{{item}}" bindtap="onLevel">{{item}}</button>
+  </view>
+  <view class="hint">第 {{level}} 级：{{levelName}}</view>
+  <view class="label">看到第几周</view>
+  <view class="weeks">
+    <button wx:for="{{weeks}}" wx:key="*this" class="wk {{week===item?'on':''}}" data-n="{{item}}" bindtap="onWeek">{{item}}</button>
+  </view>
+  <canvas type="2d" id="cobb" class="chart"></canvas>
+  <view class="legend">
+    <text><text class="i" style="background:#8A8494"></text>不练</text>
+    <text><text class="i" style="background:#A9C3D4"></text>只练动作</text>
+    <text><text class="i" style="background:#3E6F8A"></text>边做边答题</text>
+  </view>
+  <view class="h1" style="font-size:44rpx">第 {{week}} 周，大概在这些范围</view>
+  <view class="out {{item.dual ? 'dual' : ''}}" wx:for="{{cards}}" wx:key="name">
+    <view class="h">{{item.name}}</view>
+    <view>弯曲角度 {{item.cobb}}</view>
+    <view>两边肌肉更对称的程度 {{item.sym}}</view>
+    <view>肩高差 {{item.shoulder}}</view>
+    <view>侧歪角度 {{item.lean}}</view>
+    <view>身体自在感 {{item.body}}</view>
+    <view>生活方便程度 {{item.qol}}</view>
+  </view>
+  <button class="btn ghost" bindtap="toggleMech">给讲解用的机制图</button>
+  <view wx:if="{{mech}}">
+    <canvas type="2d" id="mech" class="chart"></canvas>
+    <view class="legend">
+      <text><text class="i" style="background:#5E516C"></text>姿势越来越不用刻意想</text>
+      <text><text class="i" style="background:#7FA3B8"></text>资源不够用的比例</text>
+    </view>
+    <view class="hint">第 0 周资源池按方案算例：总量 48。这张图是讲机制用的，不是给您下的结论。</view>
+  </view>
+  <view class="disclaimer purple">这是仿真示意，不能用来给这个人下结论。<text class="small">体像和生活方便程度是 0 到 100 的仿真指数，不是量表原分。100 表示更自在、生活更方便。</text></view>
+</view>

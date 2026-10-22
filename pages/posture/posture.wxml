@@ -1,0 +1,52 @@
+<view class="page" wx:if="{{step==='intro'}}">
+  <view class="h1">和自己的第一次比</view>
+  <view class="lead">{{intro}}</view>
+  <view class="card" style="margin-bottom:16rpx">对照：两边肩膀一样高，身子沿中线。</view>
+  <view class="steps">
+    <text>拍照</text>
+    <image class="step-arrow" src="/assets/icon-step-arrow.png" mode="aspectFit" />
+    <text>对比</text>
+    <image class="step-arrow" src="/assets/icon-step-arrow.png" mode="aspectFit" />
+    <text>发现变化</text>
+    <image class="step-arrow" src="/assets/icon-step-arrow.png" mode="aspectFit" />
+    <text>照镜调回</text>
+  </view>
+  <view class="place" style="background:#E7F5EC">请全身入镜，露出肩膀和髋部。画面看不清时，不会显示数字。请站在地面固定标记处，距离、高度和朝向都保持不变。</view>
+  <button class="btn green" bindtap="shoot">拍一张</button>
+  <button class="btn ghost" bindtap="album">从相册选一张</button>
+  <button class="linkish" bindtap="sample" style="width: 560rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">示意图练手，不记入记录</button>
+</view>
+
+<view class="page" wx:elif="{{step==='mark'}}">
+  <view class="point-now">{{nextName}}</view>
+  <view class="stage" wx:if="{{source==='photo'}}">
+    <image id="shot" class="shot" src="{{src}}" mode="widthFix" bindtap="onImageTap" />
+    <view wx:for="{{dots}}" wx:key="index" class="dot" style="left:{{item.left}}%;top:{{item.top}}%;background:{{item.color}}">{{index+1}}</view>
+  </view>
+  <canvas wx:else type="2d" id="sample" class="chart" style="height:720rpx" bindtouchstart="onSample"></canvas>
+  <button class="btn ghost" bindtap="undo">撤销上一个点</button>
+  <button class="btn ghost" bindtap="unclear">肩膀或髋看不清</button>
+  <view wx:if="{{report}}">
+    <view class="card" style="margin-top:16rpx">
+      <view class="hint">{{report.title}}</view>
+      <view class="num-big {{report.shoulderOver ? 'bad' : ''}}">{{report.shoulderText}}</view>
+      <view>两边肩膀高度差 · {{report.higher}}</view>
+      <view class="num-big {{report.leanOver ? 'bad' : ''}}">{{report.leanText}}</view>
+      <view>身子侧歪的角度</view>
+      <view style="margin-top:12rpx">{{report.body}}</view>
+      <view class="hint">按肩宽 38 厘米换算，只和您第一次比。肩高差 2 厘米、侧歪 5° 是假设界限，过了才用红色标出。</view>
+    </view>
+    <button wx:if="{{canSave}}" class="btn green" bindtap="savePose">记下来</button>
+    <view wx:if="{{saved}}" class="hint">已经记在这台手机里。</view>
+    <button class="btn ghost" bindtap="again">再拍一张</button>
+  </view>
+</view>
+
+<view class="page" wx:else>
+  <view class="card">
+    <view class="v" style="font-size:48rpx;font-weight:800">这次先不给数字</view>
+    <view>{{refused}}</view>
+  </view>
+  <button class="btn green" bindtap="again">重拍</button>
+  <button class="btn ghost" bindtap="home">回到今天</button>
+</view>

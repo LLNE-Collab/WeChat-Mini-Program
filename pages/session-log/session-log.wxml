@@ -1,0 +1,11 @@
+<view class="page">
+  <block wx:if="{{list.length}}">
+    <view class="rec" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="open">
+      <view class="nth">第 {{item.n}} 次训练</view>
+      <view>{{item.when}} · 第 {{item.level}} 级</view>
+      <view class="hint">正确率 {{item.pct}}% · 反应 {{item.rt}} 秒</view>
+      <view class="hint" wx:if="{{item.advice}}">{{item.advice}}</view>
+    </view>
+  </block>
+  <view wx:else class="empty">暂无记录</view>
+</view>

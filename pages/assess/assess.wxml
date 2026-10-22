@@ -1,0 +1,49 @@
+<view class="page" wx:if="{{step==='form'}}">
+  <view class="fill-tip" wx:if="{{fillTip}}">请填完所有信息</view>
+  <view class="h1">预测背部弯曲方式</view>
+  <view class="lead">填完会有大概范围。仅是仿真推演，不是诊断。</view>
+  <view class="err" wx:if="{{err}}">还差：{{err}}</view>
+  <view class="field">
+    <view class="label">手术哪一侧</view>
+    <view class="choices">
+      <button class="chip {{draft.side==='left'?'on':''}}" data-key="side" data-value="left" bindtap="choose" style="width: 302rpx; height: 55rpx; display: block; box-sizing: border-box; left: 21rpx; top: 0rpx; position: relative">左侧</button>
+      <button class="chip {{draft.side==='right'?'on':''}}" data-key="side" data-value="right" bindtap="choose" style="width: 302rpx; height: 55rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">右侧</button>
+    </view>
+  </view>
+  <view class="field" wx:for="{{steps}}" wx:key="key">
+    <view class="label">{{item.label}}</view>
+    <view class="stepper">
+      <button class="pm" data-key="{{item.key}}" data-dir="-1" bindtap="bump" style="width: 83rpx; height: 85rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx; position: relative">－</button>
+      <view class="val" style="height: 85rpx; display: flex; box-sizing: border-box">{{item.shown}}</view>
+      <button class="pm" data-key="{{item.key}}" data-dir="1" bindtap="bump" style="width: 85rpx; height: 85rpx; display: block; box-sizing: border-box; left: 22rpx; top: 0rpx; position: relative">＋</button>
+    </view>
+  </view>
+  <view class="field">
+    <view class="label">化疗方案</view>
+    <view class="choices">
+      <button wx:for="{{chemos}}" wx:key="id" class="chip {{draft.chemoRegimen===item.id?'on':''}}" data-key="chemoRegimen" data-value="{{item.id}}" bindtap="choose" style="width: 304rpx; height: 62rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">{{item.name}}</button>
+    </view>
+  </view>
+  <view class="field">
+    <view class="label">日常活动习惯</view>
+    <view class="choices">
+      <button wx:for="{{activities}}" wx:key="id" class="chip {{draft.activity===item.id?'on':''}}" data-key="activity" data-value="{{item.id}}" bindtap="choose" style="width: 308rpx; height: 95rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">{{item.name}}</button>
+    </view>
+  </view>
+  <view class="hint">基线认知评分0–30（不确定按主观印象填即可）</view>
+  <button class="btn teal" bindtap="run" style="width: 414rpx; display: ; box-sizing: ; left: 0rpx; top: 0rpx; height: -35rpx">看三个月后</button>
+  <button class="linkish" bindtap="fillDemo">填入方案里的算例</button>
+</view>
+
+<view class="page" wx:else>
+  <view class="k" style="color:#757575">风险</view>
+  <view class="risk {{out.riskClass}}">{{out.risk}}</view>
+  <view class="lead" style="color:#212121;font-size:36rpx">{{out.direction}}</view>
+  <view>现在弯曲角度大约 {{out.cobb0}}°。手术在{{out.sideText}}。</view>
+  <view style="margin-top:16rpx">不干预的3个月后：</view>
+  <view class="range">弯曲角度 {{out.cobbText}}</view>
+  <view class="range">肩高差 {{out.shoulderText}}</view>
+  <view class="disclaimer">仿真推演，不是诊断。<text class="small">仅供护理评估参考，不能据此判定个人。s</text></view>
+  <button class="btn purple" bindtap="predict" style="height: 100rpx; display: block; box-sizing: border-box; left: 0rpx; top: 20rpx; width: 458rpx; position: relative">坚持练会怎样</button>
+  <button class="btn ghost" bindtap="home" style="position: relative; left: 0rpx; top: 22rpx; height: 48rpx; display: block; box-sizing: border-box">返回今天</button>
+</view>

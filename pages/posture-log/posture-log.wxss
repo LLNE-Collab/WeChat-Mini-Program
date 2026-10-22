@@ -1,0 +1,8 @@
+.nth { font-size: 40rpx; font-weight: 800; margin-bottom: 8rpx; }
+.empty {
+  margin-top: 200rpx;
+  text-align: center;
+  color: #757575;
+  font-size: 36rpx;
+  font-weight: 700;
+}
